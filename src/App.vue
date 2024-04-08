@@ -3,20 +3,23 @@
     <SiteHeader />    
     <div class="content">
       <HomeView />
+      <AboutView />
     </div>
     
   </div>
 </template>
 
 <script>
-import HomeView from '@/views/Home.view.vue'
-import SiteHeader from '@/components/SiteHeader.vue'
+import SiteHeader from '@/components/SiteHeader.vue';
+import HomeView from '@/views/Home.view.vue';
+import AboutView from '@/views/About.view.vue';
 
 export default {
   name: 'App',
   components: {
     SiteHeader,
-    HomeView
+    HomeView,
+    AboutView,
   }
 }
 </script>

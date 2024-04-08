@@ -1,14 +1,16 @@
 <template>
   <header class="SiteHeader">
-    <h1 class="SiteHeader-title">{{ $t('header.title') }}</h1>
+    <div class="SiteHeader-inner View">
+      <h1 class="SiteHeader-title">{{ $t('header.title') }}</h1>
 
-    <nav asia-label="Main" class="SiteHeader-nav">
-      <a href="#about">{{ $t('header.about') }}</a>
-      <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
-      <a href="#roadmap">{{ $t('header.roadmap') }}</a>
-      <a href="#whitepaper">{{ $t('header.whitepaper') }}</a>
-      <a href="#buy">{{ $t('header.buy') }}</a>
-    </nav>
+      <nav asia-label="Main" class="SiteHeader-nav">
+        <a href="#about">{{ $t('header.about') }}</a>
+        <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
+        <a href="#roadmap">{{ $t('header.roadmap') }}</a>
+        <a href="#whitepaper">{{ $t('header.whitepaper') }}</a>
+        <a href="#buy">{{ $t('header.buy') }}</a>
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -22,13 +24,17 @@ export default {
 @import '@/styles/variables';
 
 .SiteHeader {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
   left: 0;
   position: fixed; 
   top: 0;
   width: 100%;
+  z-index: 100;
+  
+  &-inner {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
 
   &-title {
     background: url('@/assets/images/coin.png') no-repeat;
