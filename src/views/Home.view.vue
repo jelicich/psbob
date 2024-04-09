@@ -28,6 +28,9 @@
     <img class="HomeView-misc HomeView-misc--1" src="@/assets/images/plant-1.png" />
     <img class="HomeView-misc HomeView-misc--2" src="@/assets/images/plant-2.png" />
     <img class="HomeView-misc HomeView-misc--3" src="@/assets/images/plant-3.png" />
+    <img class="HomeView-misc HomeView-misc--4" src="@/assets/images/smoke.webp" />
+    <img class="HomeView-misc HomeView-misc--5" src="@/assets/images/smoke.webp" />
+    <img class="HomeView-misc HomeView-misc--6" src="@/assets/images/smoke.webp" />
   </section>
 </template>
 <script>
@@ -45,7 +48,8 @@ export default {
   
   mounted() {
     this.animateMain();
-    this.animateMisc();
+    this.animatePlants();
+    this.animateSmoke();
   },
   
   methods: {
@@ -68,7 +72,7 @@ export default {
       this.timeline.to(TARGET_SEL, outroAnimationOptions);
     },
 
-    animateMisc() {
+    animatePlants() {
       const TARGET_SEL_1 = ".HomeView-misc--1, .HomeView-misc--3";
       const TARGET_SEL_2 = ".HomeView-misc--2";
       const TRIGGER_ELEMENT_SEL = "#about";
@@ -97,6 +101,50 @@ export default {
 
       this.timeline.to(TARGET_SEL_1, outroAnimationOptions1);
       this.timeline.to(TARGET_SEL_2, outroAnimationOptions2);
+    },
+
+    animateSmoke() {
+      const TARGET_SEL_1 = ".HomeView-misc--4";
+      const TARGET_SEL_2 = ".HomeView-misc--5";
+      const TARGET_SEL_3 = ".HomeView-misc--6";
+      const TRIGGER_ELEMENT_SEL = "#about";
+
+      const outroAnimationOptions1 = {
+        runInMobile: false,
+        gsapOptions: {
+          scrollTrigger: {
+            trigger: TRIGGER_ELEMENT_SEL,
+            scrub: true,
+            start: "top bottom",
+            end: "top top",
+          },
+          x: -this.helpers.vh(25),
+          scale: 1.8,
+          opacity: 1
+        },
+      };
+
+      const outroAnimationOptions2 = {
+        runInMobile: false,
+        gsapOptions: {
+          ...outroAnimationOptions1.gsapOptions,
+          x: this.helpers.vh(35),
+          scale: 1.5
+        },
+      };
+
+      const outroAnimationOptions3 = {
+        runInMobile: false,
+        gsapOptions: {
+          ...outroAnimationOptions1.gsapOptions,
+          x: this.helpers.vh(15),
+          scale: 1.05
+        },
+      };
+
+      this.timeline.to(TARGET_SEL_1, outroAnimationOptions1);
+      this.timeline.to(TARGET_SEL_2, outroAnimationOptions2);
+      this.timeline.to(TARGET_SEL_3, outroAnimationOptions3);
     }
   }
 }
@@ -173,6 +221,23 @@ export default {
 
     &--3 {
       right: 20px;
+    }
+
+    &--4 {
+      bottom: 15vh;
+      left: 3vw;
+      opacity: 0.5;
+      transform: rotate(180deg);
+    }
+
+    &--5 {
+      bottom: 30vh;
+      left: 40vw;
+    }
+
+    &--6 {
+      bottom: 22px;
+      left: 80vw;
     }
   }
 }
