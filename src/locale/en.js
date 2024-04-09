@@ -6,5 +6,10 @@ export default {
     roadmap: 'Roadmap',
     whitepaper: 'Whitepaper',
     buy: 'Buy PSBOB'
+  },
+  home: {
+    actions: {
+      buy: 'Buy on Raydium'
+    }
   }
 }

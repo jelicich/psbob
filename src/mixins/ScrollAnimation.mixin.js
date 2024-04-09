@@ -43,6 +43,7 @@ export default {
         vh: _vh,
         vw: _vw,
       },
+      gsap
     }
   },
 

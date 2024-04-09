@@ -13,11 +13,18 @@
 
           <div class="HomeView-actions">
             <!-- TODO add icon -->
-            <ActionButton>Buy on Raydium</ActionButton>
+            <ActionButton size="xl">
+              {{ $t('home.actions.buy') }}
+              <SvgIcon name="raydium" size="xl" />
+            </ActionButton>
             <!-- TODO add icon -->
-            <ActionButton>T</ActionButton>
+            <ActionButton size="xl">
+              <SvgIcon name="telegram" size="xl" />
+            </ActionButton>
             <!-- TODO add icon -->
-            <ActionButton>X</ActionButton>
+            <ActionButton size="xl">
+              <SvgIcon name="x" size="xl" />
+            </ActionButton>
           </div>
         </div>
         <div class="HomeView-contentCol d-flex">
@@ -28,13 +35,14 @@
     <img class="HomeView-misc HomeView-misc--1" src="@/assets/images/plant-1.png" />
     <img class="HomeView-misc HomeView-misc--2" src="@/assets/images/plant-2.png" />
     <img class="HomeView-misc HomeView-misc--3" src="@/assets/images/plant-3.png" />
-    <img class="HomeView-misc HomeView-misc--4" src="@/assets/images/smoke.webp" />
-    <img class="HomeView-misc HomeView-misc--5" src="@/assets/images/smoke.webp" />
-    <img class="HomeView-misc HomeView-misc--6" src="@/assets/images/smoke.webp" />
+    <img class="HomeView-misc HomeView-misc--4" src="@/assets/images/smoke-1.webp" />
+    <img class="HomeView-misc HomeView-misc--5" src="@/assets/images/smoke-2.webp" />
+    <img class="HomeView-misc HomeView-misc--6" src="@/assets/images/smoke-2.webp" />
   </section>
 </template>
 <script>
 import ActionButton from '@/components/ActionButton.vue';
+import SvgIcon from '@/components/SvgIcon.vue';
 import ScrollAnimation from '@/mixins/ScrollAnimation.mixin';
 
 export default {
@@ -43,7 +51,8 @@ export default {
   mixins: [ScrollAnimation],
 
   components: {
-    ActionButton
+    ActionButton,
+    SvgIcon
   },
   
   mounted() {
@@ -184,6 +193,11 @@ export default {
 
   &-contentCol {
     width: 50%;
+
+    &:first-child {
+      position: relative;
+      z-index: 2;
+    }
   }
 
   &-title {
@@ -199,15 +213,17 @@ export default {
     width: 100%;
     max-width: 700px;
     margin-left: auto;
+    pointer-events: none;
   }
 
   &-misc {
     filter: brightness(50%) blur(3px);
     position: absolute;
     bottom: -15vh;
-    z-index: 2;
+    z-index: 0;
     max-width: 500px;
     width: 25vw;
+    pointer-events: none;
 
     &--1 {
       left: 20px;
@@ -221,24 +237,33 @@ export default {
 
     &--3 {
       right: 20px;
+      z-index: 2;
     }
 
     &--4 {
       bottom: 15vh;
       left: 3vw;
-      opacity: 0.5;
+      opacity: 0.7;
       transform: rotate(180deg);
     }
 
     &--5 {
       bottom: 30vh;
       left: 40vw;
+      scale: 2;
+      z-index: 2;
     }
 
     &--6 {
       bottom: 22px;
       left: 80vw;
+      z-index: 2;
     }
+  }
+
+  &-actions {
+    display: flex;
+    gap: 18px;
   }
 }
 </style>
