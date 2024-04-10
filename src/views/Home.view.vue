@@ -160,6 +160,7 @@ export default {
 </script>
 <style lang="scss">
 @import '@/styles/variables';
+@import '@/styles/animations';
 
 .HomeView {
   background-image: url('@/assets/images/bg-simple.png');
@@ -175,12 +176,16 @@ export default {
     position: absolute;
     top: 0;
     width: 100%;
+
+    animation-name: dark;
+    animation-duration: 3.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
   }
 
   &-inner {
     display: flex;
     height: calc(100% - $header-height);
-    padding-top: $header-height;
     position: relative;
     z-index: 1;
   }

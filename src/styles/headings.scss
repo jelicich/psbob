@@ -1,0 +1,9 @@
+@mixin heading-base {
+  font-family: 'Krabby Patty', sans-serif;
+}
+
+h1 {
+  @include heading-base;
+  font-size: 60px;
+  letter-spacing: 1.5px;
+}

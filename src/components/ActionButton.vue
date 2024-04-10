@@ -91,5 +91,11 @@ export default {
     color: $black;
   }
 
+  // TODO:
+  &--secondary {
+    background-color: $white;
+    border-color: $black;
+    color: $black;
+  }
 }
 </style>

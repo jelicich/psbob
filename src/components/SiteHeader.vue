@@ -1,16 +1,20 @@
 <template>
   <header class="SiteHeader">
-    <div class="SiteHeader-inner View">
+    <div class="SiteHeader-inner">
       <h1 class="SiteHeader-title">
         <a class="SiteHeader-titleLink" href="#home">{{ $t('header.title') }}</a>
       </h1>
 
       <nav asia-label="Main" class="SiteHeader-nav">
+        <ActionButton
+          class="SiteHeader-buyButton"
+          variant="secondary"
+          size="lg"
+        >{{ $t('header.buy') }}</ActionButton>
         <a href="#about">{{ $t('header.about') }}</a>
         <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
         <a href="#roadmap">{{ $t('header.roadmap') }}</a>
         <a href="#whitepaper">{{ $t('header.whitepaper') }}</a>
-        <a href="#buy">{{ $t('header.buy') }}</a>
       </nav>
     </div>
   </header>
@@ -18,17 +22,23 @@
 
 <script>
 import ScrollAnimation from '@/mixins/ScrollAnimation.mixin';
+import ActionButton from '@/components/ActionButton.vue';
 
 export default {
   name: 'SiteHeader',
 
   mixins: [ScrollAnimation],
+
+  components: {
+    ActionButton
+  },
   
   mounted() {
     this.setSmoothScroll();
     this.animateLogo();
-    this.setBgColor();
-    this.setTextColor();
+    this.animateBgColor();
+    this.animateTextColor();
+    this.animateBuyButtton();
   },
   
   methods: {
@@ -73,7 +83,7 @@ export default {
       this.timeline.from(TARGET_SEL, outroAnimationOptions);
     },
     
-    setBgColor() {
+    animateBgColor() {
       const TARGET_SEL = '.SiteHeader';
       const TRIGGER_ELEMENT_SEL = '#about';
       const outroAnimationOptions = {
@@ -92,7 +102,7 @@ export default {
       this.timeline.to(TARGET_SEL, outroAnimationOptions);
     },
 
-    setTextColor() {
+    animateTextColor() {
       const TARGET_SEL = '.SiteHeader-nav a';
       const TRIGGER_ELEMENT_SEL = '#about';
       const outroAnimationOptions = {
@@ -110,6 +120,26 @@ export default {
 
       this.timeline.to(TARGET_SEL, outroAnimationOptions);
     },
+
+    animateBuyButtton() {
+      const TARGET_SEL = '.SiteHeader-buyButton';
+      const TRIGGER_ELEMENT_SEL = '.HomeView-actions';
+
+      const outroAnimationOptions = {
+        runInMobile: false,
+        gsapOptions: {
+          scrollTrigger: {
+            trigger: TRIGGER_ELEMENT_SEL,
+            scrub: true,
+            start: 'top top',
+            end: 'bottom -200px',
+          },
+          scale: 0,
+        },
+      };
+
+      this.timeline.from(TARGET_SEL, outroAnimationOptions);
+    }
   }
 }
 </script>
@@ -125,17 +155,21 @@ export default {
   z-index: 100;
   
   &-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-inline: 60px;
     align-items: center;
     display: flex;
     justify-content: space-between;
   }
 
   &-title {
-    margin: 0;  
+    margin: 0;
+    display: flex;
   }
 
   &-titleLink {
-    background: url('@/assets/images/coin.png') no-repeat;
+    background: url('@/assets/images/coin.svg') no-repeat;
     background-size: cover;
     display: inline-block;
     height: 70px;
@@ -145,6 +179,7 @@ export default {
   }
 
   &-nav {
+    align-items: center;
     display: flex;
     gap: 12px;
 
