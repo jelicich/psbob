@@ -31,7 +31,7 @@ export default {
 .AboutView {
   background-color: $primary;
   // background: rgb(252,255,91);
-  background: linear-gradient(180deg, rgba(252,255,91,1) 0%, rgba(252,255,91,1) 15%, rgba(209,174,45,1) 100%);
+  background: linear-gradient(180deg, rgba(252,255,91,1) 0%, rgba(209,174,45,1) 100%);
 
   &-inner {
     display: flex;

@@ -26,6 +26,19 @@ function _vh(coef) {
 function _vw(coef) {
   return window.innerWidth * (coef / 100);
 }
+
+// Determine if an element is in the visible viewport
+function _isInViewport(elementSelector) {
+  const element = document.querySelector(elementSelector);
+  const { top, bottom } = element.getBoundingClientRect();
+  const vHeight = (window.innerHeight || document.documentElement.clientHeight);
+
+  return (
+    (top > 0 || bottom > 0) &&
+    top < vHeight
+  );
+}
+
 export default {
   
   created() {
@@ -42,6 +55,7 @@ export default {
       helpers: {
         vh: _vh,
         vw: _vw,
+        isInViewport: _isInViewport,
       },
       gsap
     }

@@ -27,6 +27,7 @@ export default {
 }
 </script>
 <style lang="scss">
+@import '@/styles/variables';
 $startOp: 0.3;
 
 .FlippingCoin {
@@ -72,7 +73,7 @@ $startOp: 0.3;
     mask-image: url('@/assets/images/coin-flip1.svg');
     mask-size: contain;
     mask-repeat: no-repeat;
-    background-color: #c8a058;
+    background-color: $primary-dark;
   }
 
   .coin{
