@@ -13,7 +13,7 @@
       <div id="child5" class="coin coin-mid"></div>
       <div id="child6" class="coin coin-mid"></div>
       <div id="child7" class="coin coin-mid"></div>
-      <div id="child8" class="coin coin-mid">
+      <div id="child8" class="coin">
         <div class="FlippingCoin-imgWrapper2">
         </div>
         <!-- svg here -->
@@ -23,16 +23,19 @@
 </template>
 <script>
 export default {
-  
+  name: 'FlippingCoin'
 }
 </script>
 <style lang="scss">
+$startOp: 0.3;
+
 .FlippingCoin {
   &-imgWrapper {
     background: url('@/assets/images/coin-flip1.svg') no-repeat;
     background-size: contain;
     height: 100%;
     width: 100%;
+    animation: bri 3s infinite ease-in;
   }
 
   &-imgWrapper2 {
@@ -41,6 +44,7 @@ export default {
     height: 100%;
     width: 100%;
     transform: scaleX(-1);
+    animation: bri 3s infinite ease-in;
   }
 
   // svg{
@@ -77,9 +81,7 @@ export default {
     width: 95%;
     height: 95%;
     -webkit-transform-style: preserve-3d;
-    // background:radial-gradient(#38bc85,#22845b,black);
     border-radius:50%;
-    // border:5px solid mediumseagreen; 
   }
 
   .shadow{
@@ -110,8 +112,9 @@ export default {
     top:300px;
     left:40px;
     border-radius:50%;
-    box-shadow: 0px 0px 10px 8px rgba(0, 0, 0, 0.3);
-    animation: opa 3s infinite;
+    box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, 0.3);
+    opacity: $startOp;
+    animation: opa 3s infinite ease-in;
   }
 
   #child1 {
@@ -158,16 +161,31 @@ export default {
 
   @keyframes opa{
     0%{
-      opacity: 1;
+      opacity: $startOp;
     }
-    25%{
-      opacity: 0.4;
+    20%{
+      opacity: 0.1;
     }
     30%{
-      opacity: 1;
+      opacity: $startOp;
     }
-    45%{
-      opacity: 0.3;
+    40%{
+      opacity: 0.1
+    }
+  }
+
+  @keyframes bri{
+    0%{
+      filter: brightness(1)
+    }
+    20%{
+      filter: brightness(1.1)
+    }
+    30%{
+      filter: brightness(1)
+    }
+    40%{
+      filter: brightness(1.1)
     }
   }
 }

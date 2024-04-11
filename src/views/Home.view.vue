@@ -7,8 +7,8 @@
           <h1 class="HomeView-title">
             <img alt="Primitive SpongeBob" src="@/assets/images/title.png"/>
           </h1>
-          <p class="HomeView-description">
-            The token you were waiting for, to go from Bikini Bottom to the moon. Hold your bags, let the jeets out, relax, and enjoy the most erratic journey to success with us.
+          <p class="HomeView-description text-xl">
+            {{ $t('home.description') }}
           </p>
 
           <div class="HomeView-actions">
@@ -18,11 +18,19 @@
               <SvgIcon name="raydium" size="xl" />
             </ActionButton>
             <!-- TODO add icon -->
-            <ActionButton size="xl" @click="openLink('https://t.me/+wKEdNPCjDuhlMmY8')">
+            <ActionButton 
+              size="xl" 
+              :title="$t('home.actions.telegram')" 
+              @click="openLink('https://t.me/+wKEdNPCjDuhlMmY8')"
+              >
               <SvgIcon name="telegram" size="xl" />
             </ActionButton>
             <!-- TODO add icon -->
-            <ActionButton size="xl" @click="openLink('https://twitter.com/PSBOB_Solana')"> 
+            <ActionButton 
+              size="xl" 
+              :title="$t('home.actions.x')"
+              @click="openLink('https://twitter.com/PSBOB_Solana')"
+              >
               <SvgIcon name="x" size="xl" />
             </ActionButton>
           </div>
@@ -188,7 +196,6 @@ export default {
 
   &-inner {
     display: flex;
-    height: calc(100% - $header-height);
     position: relative;
     z-index: 1;
   }
@@ -214,7 +221,6 @@ export default {
 
   &-description {
     color: $white;
-    font-size: 18px;
   }
 
   &-mainImg {
