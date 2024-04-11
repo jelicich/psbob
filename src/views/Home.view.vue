@@ -18,11 +18,11 @@
               <SvgIcon name="raydium" size="xl" />
             </ActionButton>
             <!-- TODO add icon -->
-            <ActionButton size="xl">
+            <ActionButton size="xl" @click="openLink('https://t.me/+wKEdNPCjDuhlMmY8')">
               <SvgIcon name="telegram" size="xl" />
             </ActionButton>
             <!-- TODO add icon -->
-            <ActionButton size="xl">
+            <ActionButton size="xl" @click="openLink('https://twitter.com/PSBOB_Solana')"> 
               <SvgIcon name="x" size="xl" />
             </ActionButton>
           </div>
@@ -62,6 +62,9 @@ export default {
   },
   
   methods: {
+    openLink(url) {
+      window.open(url, '_blank');
+    },
     animateMain() {
       const TARGET_SEL = '.HomeView-mainImg';
       const TRIGGER_ELEMENT_SEL = "#about";
