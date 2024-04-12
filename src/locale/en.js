@@ -25,7 +25,8 @@ export default {
     description: 'Lorem ipsum dolor asdlk sdoe4pfd lfo sdlk moon lfg',
     address: {
       title: 'Token address',
-      description: 'KZSGpxRZH4qFsGBgMg3Z7dD6953PnGMkn9TVyboWKWK'
+      description: 'KZSGpxRZH4qFsGBgMg3Z7dD6953PnGMkn9TVyboWKWK',
+      copy: 'Copy address',
     },
     supply: {
       title: 'Supply',

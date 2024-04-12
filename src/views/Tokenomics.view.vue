@@ -17,7 +17,7 @@
               <p class="TokenomicsView-infoDescription text-xl">
                 {{ $t('tokenomics.address.description') }}
                 <ActionButton @click="copyToClipboard()">
-                  Copy contract
+                  {{ $t('tokenomics.address.copy') }}
                   <transition name="fade">
                     <div class="tooltip" v-if="showTooltip">Copied!</div>
                   </transition>
@@ -145,6 +145,8 @@ export default {
 
 .ActionButton {
   background-color: $primary-darker;
+  color: $white;
+  margin-top: 10px;
 }
 }
 </style>
