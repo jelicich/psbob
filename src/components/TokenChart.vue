@@ -34,9 +34,11 @@ export default {
   data() {
     return {
       data: [
-        {value: 60, name: 'liquidity'}, 
-        {value: 30, name: 'marketing'},
-        {value: 10, name: 'team'}
+        {value: 30, name: 'liquidity'}, 
+        {value: 10, name: 'marketing'},
+        {value: 5, name: 'team'},
+        {value: 5, name: 'cex'},
+        {value: 50, name: 'presale'},
       ],
       listener: null,
     }
@@ -55,7 +57,7 @@ export default {
     initChart() {
       // TODO: refactor
       let data = this.data;
-      let colors = ['#fcff5b', '#c8a058', '#7e5f26'];
+      let colors = ['#fcff5b', '#c8a058', '#9DD9D2', '#81667A', '#D8A7CA'];
 
       let sizes = {
         innerRadius: 0,
@@ -197,7 +199,19 @@ $height: 350px;
 
     &--team {
       &:before {
-        background-color: $primary-darker
+        background-color: $tiffany
+      }
+    }
+
+    &--cex {
+      &:before {
+        background-color: $violet
+      }
+    }
+
+    &--presale {
+      &:before {
+        background-color: $pink
       }
     }
   }

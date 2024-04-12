@@ -25,11 +25,11 @@ export default {
     description: 'Lorem ipsum dolor asdlk sdoe4pfd lfo sdlk moon lfg',
     address: {
       title: 'Token address',
-      description: '#'
+      description: 'KZSGpxRZH4qFsGBgMg3Z7dD6953PnGMkn9TVyboWKWK'
     },
     supply: {
       title: 'Supply',
-      description: '100.000.000.000'
+      description: '1.000.000.000'
     },
     tax: {
       title: 'Tax',
@@ -40,7 +40,9 @@ export default {
     label: {
       liquidity: 'Liquidity',
       marketing: 'Marketing',
-      team: 'Team'
+      team: 'Team',
+      cex: 'CEX',
+      presale: 'Presale',
     }
   }
 }
