@@ -16,6 +16,12 @@
               </h2>
               <p class="TokenomicsView-infoDescription text-xl">
                 {{ $t('tokenomics.address.description') }}
+                <ActionButton @click="copyToClipboard()">
+                  Copy contract
+                  <transition name="fade">
+                    <div class="tooltip" v-if="showTooltip">Copied!</div>
+                  </transition>
+                </ActionButton>
               </p>
             </article>
 
@@ -48,12 +54,30 @@
 
 <script>
 import TokenChart from '@/components/TokenChart.vue';
+import ActionButton from '@/components/ActionButton.vue';
 
 export default {
   name: 'TokenomicsView',
+  data() {
+    return {
+      address: 'KZSGpxRZH4qFsGBgMg3Z7dD6953PnGMkn9TVyboWKWK',
+      showTooltip: false,
+    }
+  },
 
   components: {
-    TokenChart
+    TokenChart,
+    ActionButton,
+  },
+
+  methods: {
+    copyToClipboard() {
+      navigator.clipboard.writeText(this.address)
+      this.showTooltip = true;
+      setTimeout(() => {
+        this.showTooltip = false;
+      }, 2000);
+    }
   }
 }
 </script>
@@ -101,5 +125,26 @@ export default {
     display: flex;
     justify-content: center;
   }
+
+  .tooltip {
+  position: absolute;
+  background: #333;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 65px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.ActionButton {
+  background-color: $primary-darker;
+}
 }
 </style>
