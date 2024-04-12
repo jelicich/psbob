@@ -13,7 +13,10 @@
       <dl>
         <template v-for="(d, i) in data">
           <div class="TokenChart-labelValueWrapper" :class="`TokenChart-labelValueWrapper--${d.name}`" :key="i">
-            <dt class="TokenChart-label text-xl">{{ $t(`tokenChart.label.${d.name}`) }}</dt>
+            <dt class="TokenChart-label text-xl">
+              <i class="TokenChart-labelColor" :style="{backgroundColor: d.color}"/>
+              {{ $t(`tokenChart.label.${d.name}`) }}
+            </dt>
             <dd class="TokenChart-value text-xl">{{d.value}}%</dd>
           </div> 
         </template>
@@ -34,16 +37,17 @@ export default {
   data() {
     return {
       data: [
-        {value: 30, name: 'liquidity'}, 
-        {value: 10, name: 'marketing'},
-        {value: 5, name: 'team'},
-        {value: 5, name: 'cex'},
-        {value: 50, name: 'presale'},
+        {value: 30, name: 'liquidity', color: '#81667A'}, 
+        {value: 10, name: 'marketing', color: '#c8a058'},
+        {value: 5, name: 'team', color: '#9DD9D2'},
+        {value: 5, name: 'cex', color: '#fcff5b'},
+        {value: 50, name: 'presale', color: '#D8A7CA'},
       ],
       listener: null,
     }
   },
   mounted() {
+    this.data = this.data.sort((a, b) => b.value - a.value);
     addEventListener('scroll', this.onViewport);
   },
   
@@ -57,7 +61,7 @@ export default {
     initChart() {
       // TODO: refactor
       let data = this.data;
-      let colors = ['#fcff5b', '#c8a058', '#9DD9D2', '#81667A', '#D8A7CA'];
+      // let colors = ['#81667A', '#c8a058', '#9DD9D2', '#fcff5b', '#D8A7CA'];
 
       let sizes = {
         innerRadius: 0,
@@ -88,7 +92,7 @@ export default {
           .data(chart)
           .enter()
           .append("path")
-          .style("fill", (d, i) => colors[i]);
+          .style("fill", (d) => d.data.color);
 
         let angleInterpolation = d3.interpolate(generator.startAngle()(), generator.endAngle()());
 
@@ -169,7 +173,7 @@ $height: 350px;
   // }
 
   &-chartImage {
-    background-image: url('@/assets/images/chart-mask-img.png');
+    background-image: url('@/assets/images/chart-mask-image.svg');
   }
   
   &-labelValueWrapper {
@@ -177,47 +181,23 @@ $height: 350px;
     display: flex;
     gap: 12px; 
     align-items: center;
+  }
 
-    &:before {
-      content: '';
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-    }
-
-    &--liquidity {
-      &:before {
-        background-color: $primary
-      }
-    }
-
-    &--marketing {
-      &:before {
-        background-color: $primary-dark
-      }
-    }
-
-    &--team {
-      &:before {
-        background-color: $tiffany
-      }
-    }
-
-    &--cex {
-      &:before {
-        background-color: $violet
-      }
-    }
-
-    &--presale {
-      &:before {
-        background-color: $pink
-      }
-    }
+  &-labelColor {  
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    mask-image: url('@/assets/images/chart-label-mask.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
   }
 
   &-label {
+    align-items: center;
     color: $primary;
+    display: flex;
+    gap: 12px;
   }
   
   &-value {

@@ -12,12 +12,12 @@
           </p>
 
           <div class="HomeView-actions">
-            <!-- TODO add icon -->
+            
             <ActionButton size="xl">
               {{ $t('home.actions.buy') }}
               <SvgIcon name="raydium" size="xl" />
             </ActionButton>
-            <!-- TODO add icon -->
+            
             <ActionButton 
               size="xl" 
               :title="$t('home.actions.telegram')" 
@@ -25,7 +25,7 @@
               >
               <SvgIcon name="telegram" size="xl" />
             </ActionButton>
-            <!-- TODO add icon -->
+            
             <ActionButton 
               size="xl" 
               :title="$t('home.actions.x')"

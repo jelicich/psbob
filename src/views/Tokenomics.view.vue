@@ -13,13 +13,20 @@
               </h2>
               <p class="TokenomicsView-infoDescription text-xl">
                 {{ $t('tokenomics.address.description') }}
-                <ActionButton @click="copyToClipboard()">
-                  {{ $t('tokenomics.address.copy') }}
+              </p>
+                <ActionButton 
+                  size="xl" 
+                  variant="secondary"
+                  :title="$t('tokenomics.address.copy')" 
+                  class="TokenomicsView-copyButton"
+                  @click="copyToClipboard()"
+                  >
+                  <SvgIcon name="copy" size="xl" />
+                  <!-- TODO make component -->
                   <transition name="fade">
                     <div class="tooltip" v-if="showTooltip">Copied!</div>
                   </transition>
                 </ActionButton>
-              </p>
             </article>
 
             <article class="TokenomicsView-info">
@@ -52,6 +59,7 @@
 <script>
 import TokenChart from '@/components/TokenChart.vue';
 import ActionButton from '@/components/ActionButton.vue';
+import SvgIcon from '@/components/SvgIcon.vue';
 
 export default {
   name: 'TokenomicsView',
@@ -65,6 +73,7 @@ export default {
   components: {
     TokenChart,
     ActionButton,
+    SvgIcon
   },
 
   methods: {
@@ -102,6 +111,14 @@ export default {
     // box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.5);
     margin-bottom: 12px;
     padding: 18px;
+    mask-image: url('@/assets/images/tokenomics-mask.svg');
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+
+    &:first-child {
+      position: relative;
+    }
   }
 
   &-infoTitle {
@@ -123,27 +140,29 @@ export default {
     justify-content: center;
   }
 
+  &-copyButton {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+  }
+
+  // TODO: move when component created
   .tooltip {
-  position: absolute;
-  background: #333;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  margin-top: 65px;
-}
+    position: absolute;
+    background: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    left: -12px;
+    top: -23px;
+  }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-.ActionButton {
-  background-color: $primary-darker;
-  color: $white;
-  margin-top: 10px;
-}
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 }
 </style>
