@@ -5,9 +5,6 @@
         <h1 class="TokenomicsView-title">
           {{ $t('tokenomics.title') }}
         </h1>
-        <p class="TokenomicsView-description">
-          {{ $t('tokenomics.description') }}
-        </p>
         <div class="TokenomicsView-content d-flex">
           <div class="TokenomicsView-infoContainer">
             <article class="TokenomicsView-info">
