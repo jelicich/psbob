@@ -153,8 +153,8 @@ export default {
     color: white;
     padding: 5px;
     border-radius: 5px;
-    left: -12px;
-    top: -23px;
+    left: -9px;
+    bottom: -20px;
   }
 
   .fade-enter-active, .fade-leave-active {
