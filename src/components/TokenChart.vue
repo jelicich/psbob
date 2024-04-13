@@ -12,7 +12,13 @@
     <div class="TokenChart-labels">
       <dl>
         <template v-for="(d, i) in data">
-          <div class="TokenChart-labelValueWrapper" :class="`TokenChart-labelValueWrapper--${d.name}`" :key="i">
+          <div
+            ref="labelValueWrapper"
+            class="TokenChart-labelValueWrapper"
+            :data-name="d.name"
+            :class="`TokenChart-labelValueWrapper--${d.name}`" 
+            :key="i"
+          >
             <dt class="TokenChart-label text-xl">
               <i class="TokenChart-labelColor" :style="{backgroundColor: d.color}"/>
               {{ $t(`tokenChart.label.${d.name}`) }}
@@ -58,75 +64,93 @@ export default {
         removeEventListener('scroll', this.onViewport);
       }
     },
-    initChart() {
-      // TODO: refactor
-      let data = this.data;
-      // let colors = ['#81667A', '#c8a058', '#9DD9D2', '#fcff5b', '#D8A7CA'];
+    
+    dimList(exclude) {
+      this.$refs.labelValueWrapper.forEach((ref) => {
+        if (ref.dataset.name !== exclude) {
+          ref.classList.add('is-dimmed');
+        }
+      })
+    },
 
-      let sizes = {
+    undimList() {
+      this.$refs.labelValueWrapper.forEach((ref) => {
+          ref.classList.remove('is-dimmed');
+      })
+    },
+
+    initChart() {
+      const sizes = {
         innerRadius: 0,
         outerRadius: 100
       };
 
-      let durations = {
+      const durations = {
         entryAnimation: 2000
       };
 
-      draw();
+      this.draw(sizes, durations);
+    },
 
-      function draw() {
-        d3.select("#chart").html("");
-        
-        let generator = d3.pie()
-          .value((d) => d.value)
-          .sort((a, b) => {
-            return a.value - b.value;
-          });
+    draw(sizes, durations) {
+      d3.select("#chart").html("");
+      
+      let generator = d3.pie()
+        .value((d) => d.value)
+        .sort((a, b) => {
+          return a.value - b.value;
+        });
 
-        let chart = generator(data);
+      let chart = generator(this.data);
 
-        let arcs = d3.select("#chart")
-          .append("g")
-          .attr("transform", "translate(100, 100)")
-          .selectAll("path")
-          .data(chart)
-          .enter()
-          .append("path")
-          .style("fill", (d) => d.data.color);
+      let arcs = d3.select("#chart")
+        .append("g")
+        .attr("transform", "translate(100, 100)")
+        .selectAll("path")
+        .data(chart)
+        .enter()
+        .append("path")
+        .style("fill", (d) => d.data.color)
+        .attr('id', (d) => d.data.name)
+        .on('mouseover', (d) => {
+          this.dimList(d.target.id);
+        })
+        .on('mouseout', () => {
+          this.undimList();
+        });
 
-        let angleInterpolation = d3.interpolate(generator.startAngle()(), generator.endAngle()());
+      let angleInterpolation = d3.interpolate(generator.startAngle()(), generator.endAngle()());
 
-        let innerRadiusInterpolation = d3.interpolate(0, sizes.innerRadius);
-        let outerRadiusInterpolation = d3.interpolate(sizes.outerRadius, sizes.outerRadius);
+      let innerRadiusInterpolation = d3.interpolate(0, sizes.innerRadius);
+      let outerRadiusInterpolation = d3.interpolate(sizes.outerRadius, sizes.outerRadius);
 
-        let arc = d3.arc();
+      let arc = d3.arc();
 
-        arcs.transition()
-          .duration(durations.entryAnimation)
-          .attrTween("d", d => {
-            let originalEnd = d.endAngle;
-            return t => {
-              let currentAngle = angleInterpolation(t);
-              if (currentAngle < d.startAngle) {
-                return "";
-              }
+      arcs.transition()
+        .duration(durations.entryAnimation)
+        .attrTween("d", d => {
+          let originalEnd = d.endAngle;
+          return t => {
+            let currentAngle = angleInterpolation(t);
+            if (currentAngle < d.startAngle) {
+              return "";
+            }
 
-              d.endAngle = Math.min(currentAngle, originalEnd);
+            d.endAngle = Math.min(currentAngle, originalEnd);
 
-              return arc(d);
-            };
-          });
+            return arc(d);
+          };
+        });
 
-        d3.select("#chart")
-          .transition()
-          .duration(durations.entryAnimation)
-          .tween("arcRadii", () => {
-            return t => arc
-              .innerRadius(innerRadiusInterpolation(t))
-              .outerRadius(outerRadiusInterpolation(t));
-          });
-        
-      }
+      d3.select("#chart")
+        .transition()
+        .duration(durations.entryAnimation)
+        .tween("arcRadii", () => {
+          return t => arc
+            .innerRadius(innerRadiusInterpolation(t))
+            .outerRadius(outerRadiusInterpolation(t));
+        });
+      
     }
   }
 }
@@ -152,6 +176,7 @@ $height: 350px;
     mask-image: url('@/assets/images/chart-mask.svg');
     mask-size: contain;
     mask-repeat: no-repeat;
+    // pointer-events: none;
     position: relative;
   }
 
@@ -159,6 +184,7 @@ $height: 350px;
   &-chartImage {
     background-size: contain;
     background-repeat: no-repeat;
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -181,6 +207,11 @@ $height: 350px;
     display: flex;
     gap: 12px; 
     align-items: center;
+    transition: opacity 300ms ease-in-out;
+
+    &.is-dimmed {
+      opacity: 0.3;
+    }
   }
 
   &-labelColor {  
