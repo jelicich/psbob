@@ -15,7 +15,7 @@
                 {{ $t('tokenomics.address.description') }}
               </p>
                 <ActionButton 
-                  size="xl" 
+                  size="xs" 
                   variant="secondary"
                   :title="$t('tokenomics.address.copy')" 
                   class="TokenomicsView-copyButton"
@@ -143,7 +143,7 @@ export default {
   &-copyButton {
     position: absolute;
     right: 18px;
-    bottom: 18px;
+    top: 18px;
   }
 
   // TODO: move when component created
