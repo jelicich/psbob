@@ -1,5 +1,5 @@
 <template>
-  <section class="RoadmapView Section" id="about">
+  <section class="RoadmapView Section" id="roadmap">
     <div class="RoadmapView-inner View">
       <h1 class="RoadmapView-title">Roadmap</h1>
       <div class="RoadmapView-content">
