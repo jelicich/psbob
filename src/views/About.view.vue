@@ -16,11 +16,40 @@
 
 <script>
 import FlippingCoin from '@/components/FlippingCoin.vue';
+import ScrollAnimation from '@/mixins/ScrollAnimation.mixin';
 
 export default {
   name: 'AboutView',
+
+  mixins: [ScrollAnimation],
+
   components: {
     FlippingCoin
+  },
+  
+  mounted() {
+    this.animateBg();
+  },
+  
+  methods: {
+    animateBg() {
+      const TARGET_SEL = '.AboutView';
+      const TRIGGER_ELEMENT_SEL = "#about";
+      const outroAnimationOptions = {
+        runInMobile: false,
+        gsapOptions: {
+          scrollTrigger: {
+            trigger: TRIGGER_ELEMENT_SEL,
+            scrub: true,
+            start: "top bottom",
+            end: "bottom top",
+          },
+          backgroundPositionY: '20vh, 15vh, 15vh, center, center',
+        },
+      };
+
+      this.timeline.to(TARGET_SEL, outroAnimationOptions);
+    }
   }
 }
 </script>
@@ -30,8 +59,15 @@ export default {
 
 .AboutView {
   background-color: $primary;
-  // background: rgb(252,255,91);
-  background: linear-gradient(180deg, rgba(252,255,91,1) 0%, rgba(209,174,45,1) 100%);
+  background: 
+    url('@/assets/images/bg-flower-1.svg') top right 100%,
+    url('@/assets/images/bg-flower-2.svg') top right 100%,
+    url('@/assets/images/bg-flower-3.svg') top right 100%,
+    url('@/assets/images/asfalt-dark.png'),
+    linear-gradient(180deg, rgba(252,255,91,1) 0%, rgba(209,174,45,1) 100%);
+  background-size: 28vw, 10vw, 35vw, auto, 100%;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, no-repeat;
+  background-position: 60vw -5vh, 50vw -10vh, 0vw -10vh, center, center;
 
   &-inner {
     display: flex;

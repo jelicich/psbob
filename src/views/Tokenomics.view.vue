@@ -60,9 +60,13 @@
 import TokenChart from '@/components/TokenChart.vue';
 import ActionButton from '@/components/ActionButton.vue';
 import SvgIcon from '@/components/SvgIcon.vue';
+import ScrollAnimation from '@/mixins/ScrollAnimation.mixin';
 
 export default {
   name: 'TokenomicsView',
+
+  mixins: [ScrollAnimation],
+
   data() {
     return {
       address: 'KZSGpxRZH4qFsGBgMg3Z7dD6953PnGMkn9TVyboWKWK',
@@ -76,7 +80,31 @@ export default {
     SvgIcon
   },
 
+  mounted() {
+    this.animateBg();
+  },
+
   methods: {
+    animateBg() {
+      const TARGET_SEL = '.TokenomicsView';
+      const TRIGGER_ELEMENT_SEL = "#tokenomics";
+      const outroAnimationOptions = {
+        runInMobile: false,
+        gsapOptions: {
+          scrollTrigger: {
+            trigger: TRIGGER_ELEMENT_SEL,
+            scrub: true,
+            start: "top bottom",
+            end: "bottom top",
+          },
+          //: 70vw -5vh, 30vw 0vh, 0vw -5vh, center;
+          backgroundPositionY: '20vh, 25vh, 20vh, center, center',
+        },
+      };
+
+      this.timeline.to(TARGET_SEL, outroAnimationOptions);
+    },
+
     copyToClipboard() {
       navigator.clipboard.writeText(this.address)
       this.showTooltip = true;
@@ -93,7 +121,15 @@ export default {
 
 .TokenomicsView {
   background: rgb(209,174,45);
-  background: linear-gradient(180deg, rgba(209,174,45,1) 0%, rgba(61,0,37,1) 100%);
+  background:
+    url('@/assets/images/bg-flower-5.svg') top right 100%,
+    url('@/assets/images/bg-flower-4.svg') top right 100%,
+    url('@/assets/images/bg-flower-6.svg') top right 100%,
+    url('@/assets/images/asfalt-dark.png'),
+    linear-gradient(180deg, rgba(209,174,45,1) 0%, rgba(61,0,37,1) 100%);
+  background-size: 30vw, 10vw, 35vw, auto, 100%;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, no-repeat;
+  background-position: 70vw -5vh, 30vw 0vh, 0vw -5vh, center, center;
 
   &-contentWrapper {
     margin: auto;
@@ -108,7 +144,6 @@ export default {
   &-info {
     background: $primary;
     border-radius: 12px;
-    // box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.5);
     margin-bottom: 12px;
     padding: 18px;
     mask-image: url('@/assets/images/tokenomics-mask.svg');
