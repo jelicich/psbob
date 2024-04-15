@@ -37,6 +37,17 @@ export default {
       description: '0%'
     }
   },
+  roadmap: {
+    step1: 'Community Estableshiment',
+    step2: 'Website Release',
+    step3: 'Presale on Pinksale',
+    step4: 'Token Launch',
+    step5: 'CMC/CG Listing',
+    step6: 'Marketing Campaign',
+    step7: 'HODL with diamond hands',
+    step8: 'CEX Listing',
+    step9: 'Land on the moon',
+  },
   tokenChart: {
     label: {
       liquidity: 'Liquidity',
