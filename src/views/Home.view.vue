@@ -13,13 +13,13 @@
 
           <div class="HomeView-actions">
             
-            <ActionButton size="xl">
+            <ActionButton size="xl" class="HomeView-cta">
               {{ $t('home.actions.buy') }}
-              <SvgIcon name="raydium" size="xl" />
+              <SvgIcon name="pinksale-dark" size="xl" />
             </ActionButton>
             
-            <ActionButton 
-              size="xl" 
+            <ActionButton
+              size="xl"
               :title="$t('home.actions.telegram')" 
               @click="openLink('https://t.me/+wKEdNPCjDuhlMmY8')"
               >
@@ -278,6 +278,14 @@ export default {
   &-actions {
     display: flex;
     gap: 18px;
+  }
+
+  &-cta {
+    .SvgIcon {
+      width: 40px;
+      height: 40px;
+      margin: -8px;
+    }
   }
 }
 </style>

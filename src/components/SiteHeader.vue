@@ -7,10 +7,13 @@
 
       <nav asia-label="Main" class="SiteHeader-nav">
         <ActionButton
-          class="SiteHeader-buyButton"
+          class="SiteHeader-cta"
           variant="secondary"
           size="lg"
-        >{{ $t('header.buy') }}</ActionButton>
+        >
+          {{ $t('header.buy') }}
+          <SvgIcon name="pinksale" size="xl" />
+        </ActionButton>
         <a href="#about">{{ $t('header.about') }}</a>
         <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
         <a href="#roadmap">{{ $t('header.roadmap') }}</a>
@@ -23,6 +26,7 @@
 <script>
 import ScrollAnimation from '@/mixins/ScrollAnimation.mixin';
 import ActionButton from '@/components/ActionButton.vue';
+import SvgIcon from '@/components/SvgIcon.vue';
 
 export default {
   name: 'SiteHeader',
@@ -30,7 +34,8 @@ export default {
   mixins: [ScrollAnimation],
 
   components: {
-    ActionButton
+    ActionButton,
+    SvgIcon
   },
   
   mounted() {
@@ -38,7 +43,7 @@ export default {
     this.animateLogo();
     this.animateBgColor();
     this.animateTextColor();
-    this.animateBuyButtton();
+    this.animateBuyButton();
   },
   
   methods: {
@@ -121,8 +126,8 @@ export default {
       this.timeline.to(TARGET_SEL, outroAnimationOptions);
     },
 
-    animateBuyButtton() {
-      const TARGET_SEL = '.SiteHeader-buyButton';
+    animateBuyButton() {
+      const TARGET_SEL = '.SiteHeader-cta';
       const TRIGGER_ELEMENT_SEL = '.HomeView-actions';
 
       const outroAnimationOptions = {
@@ -189,6 +194,14 @@ export default {
       text-decoration: none;
       text-transform: uppercase;
       color: $white;
+    }
+  }
+
+  &-cta {
+    .SvgIcon {
+      width: 36px;
+      height: 36px;
+      margin: -6px;
     }
   }
 }
