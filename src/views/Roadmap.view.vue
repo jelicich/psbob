@@ -1,76 +1,85 @@
 <template>
   <section class="RoadmapView Section" id="roadmap">
     <div class="RoadmapView-inner View">
-      <h1 class="RoadmapView-title">Roadmap</h1>
-      <div class="RoadmapView-content">
-        <article class="RoadmapView-info">
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step1") }}
-            <i class="check-icon" v-if="showCheckIcon.step1"></i>
-          </p>
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step2") }}
-            <i class="check-icon" v-if="showCheckIcon.step2"></i>
-          </p>
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step3") }}
-            <i class="check-icon" v-if="showCheckIcon.step3"></i>
-          </p>
-        </article>
-
-        <article class="RoadmapView-info">
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step4") }}
-            <i class="check-icon" v-if="showCheckIcon.step4"></i>
-          </p>
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step5") }}
-            <i class="check-icon" v-if="showCheckIcon.step5"></i>
-          </p>
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step6") }}
-            <i class="check-icon" v-if="showCheckIcon.step6"></i>
-          </p>
-        </article>
-        
-        <article class="RoadmapView-info">
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step7") }}
-            <i class="check-icon" v-if="showCheckIcon.step7"></i>
-          </p>
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step8") }}
-            <i class="check-icon" v-if="showCheckIcon.step8"></i>
-          </p>
-          <p class="RoadmapView-infoDescription text-xl">
-            {{ $t("roadmap.step9") }}
-            <i class="check-icon" v-if="showCheckIcon.step9"></i>
-          </p>
-        </article>
-
+      <div class="RoadmapView-contentWrapper">
+        <h1 class="RoadmapView-title">Roadmap</h1>
+        <div class="RoadmapView-content">
+          <article
+            class="RoadmapView-info"
+            v-for="phase, i in data"
+            :key="i"
+          >
+            <h2>{{ $t(`roadmap.phase.${i}.title`) }}</h2>
+            <p
+              class="RoadmapView-infoDescription text-xl"
+              v-for="step, j in phase"
+              :key="j"
+            >
+              {{ $t(`roadmap.phase.${i}.step.${step.step}`) }}
+              <i class="check-icon" v-if="step.completed"></i>
+            </p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 </template>
   
 <script>
+import ScrollAnimation from '@/mixins/ScrollAnimation.mixin';
+
 export default {
   name: "RoadmapView",
+
+  mixins: [ScrollAnimation],
+
   data() {
     return {
-      showCheckIcon: {
-        step1: true,
-        step2: true,
-        step3: true,
-        step4: false,
-        step5: false,
-        step6: false,
-        step7: false,
-        step8: false,
-        step9: false,
-      },
+      data: [
+        [
+          { step: 'community', completed: true },
+          { step: 'website', completed: true },
+          { step: 'presale', completed: true }
+        ],
+        [
+          { step: 'launch', completed: false },
+          { step: 'listing', completed: false },
+          { step: 'marketing', completed: false }
+        ],
+        [
+          { step: 'hodl', completed: false },
+          { step: 'cex', completed: false },
+          { step: 'moon', completed: false }
+        ],
+      ]
     };
   },
+
+  mounted() {
+    this.animateBg();
+  },
+
+  methods: {
+    animateBg() {
+      const TARGET_SEL = '.RoadmapView';
+      const TRIGGER_ELEMENT_SEL = "#roadmap";
+      const outroAnimationOptions = {
+        runInMobile: false,
+        gsapOptions: {
+          scrollTrigger: {
+            trigger: TRIGGER_ELEMENT_SEL,
+            scrub: true,
+            start: "top bottom",
+            end: "bottom top",
+          },
+          //: 70vw -5vh, 30vw 0vh, 0vw -5vh, center;
+          backgroundPositionY: '70vh, 20vh, 30vh, 20vh, center, center',
+        },
+      };
+
+      this.timeline.to(TARGET_SEL, outroAnimationOptions);
+    },
+  }
 };
 </script>
   
@@ -79,36 +88,47 @@ export default {
 
 .RoadmapView {
   background:
-  url('@/assets/images/bg-flower-5.svg') top right 100%,
-  url('@/assets/images/bg-flower-4.svg') top right 100%,
-  url('@/assets/images/bg-flower-6.svg') top right 100%;
-  background-color: rgb(209,174,45);
-  background-size: 30vw, 10vw, 35vw, auto, 100%;
-  background-repeat: no-repeat, no-repeat, no-repeat, repeat, no-repeat;
-  background-position: 70vw -5vh, 30vw 0vh, 0vw -5vh, center, center;
+    url('@/assets/images/bg-roadmap-dark.png'),
+    url('@/assets/images/bg-flower-7.svg') top right 100%,
+    url('@/assets/images/bg-flower-8.svg') top right 100%,
+    url('@/assets/images/bg-flower-9.svg') top right 100%,
+    url('@/assets/images/asfalt-dark.png'),
+    linear-gradient(180deg, rgba(61,0,37,1) 0%, rgb(0, 18, 98) 100%);
+    background-size: 100%, 20vw, 22vw, 35vw, auto, 100%;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, no-repeat;
+    background-position: center 110vh, 80vw -5vh, 0vw 5vh, 40vw -5vh, center, center;
 
+  &-inner {
+    display: flex;
+  }
+  
+  &-contentWrapper {
+    margin: auto;
+    width: 100%;
+  }
+  
   &-content {
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
-    margin-top: 100px;
-
-    div {
-      flex: 1;
-    }
   }
+
+  &-title {
+    color: $primary;
+    text-align: center;
+  }
+
   &-info {
-    background:url('@/assets/images/asfalt-dark.png');
     background-color: $primary;
     border-radius: 12px;
-    box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.5);
     margin-bottom: 12px;
     padding: 18px;
     mask-image: url('@/assets/images/tokenomics-mask.svg');
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
+    flex: 1;
   }
   .check-icon::before {
     content: "\2713";

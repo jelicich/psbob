@@ -38,15 +38,32 @@ export default {
     }
   },
   roadmap: {
-    step1: 'Community Estableshiment',
-    step2: 'Website Release',
-    step3: 'Presale on Pinksale',
-    step4: 'Token Launch',
-    step5: 'CMC/CG Listing',
-    step6: 'Marketing Campaign',
-    step7: 'HODL with diamond hands',
-    step8: 'CEX Listing',
-    step9: 'Land on the moon',
+    phase: {
+      '0': {
+        title: 'Phase 1',
+        step: {
+          community: 'Community estableshiment',
+          website: 'Website release',
+          presale: 'Presale on Pinksale',
+        }
+      },
+      '1': {
+        title: 'Phase 2',
+        step: {
+          launch: 'Token launch',
+          listing: 'CMC/CG listing',
+          marketing: 'Marketing campaign'
+        }
+      },
+      '2': {
+        title: 'Phase 3',
+        step: {
+          hodl: 'HODL with diamond hands',
+          cex: 'CEX listing',
+          moon: 'Land on the moon'
+        }
+      }
+    },
   },
   tokenChart: {
     label: {
