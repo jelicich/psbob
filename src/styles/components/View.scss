@@ -4,8 +4,12 @@
   margin: 0 auto;
   padding-inline: 60px;
   padding-top: $header-height;
+  overflow: hidden;
 
   @include sm-down {
     padding-inline: 20px;
+    min-height: calc(100vh - $header-height);
+    height: auto;
+    padding-bottom: 20px;
   }
 }

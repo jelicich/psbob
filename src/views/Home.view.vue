@@ -323,9 +323,19 @@ export default {
   &-actions {
     display: flex;
     gap: 18px;
+    
+    @include sm-down {
+      flex-wrap: wrap;
+    }
   }
 
   &-cta {
+    @include sm-down {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
     .SvgIcon {
       width: 40px;
       height: 40px;

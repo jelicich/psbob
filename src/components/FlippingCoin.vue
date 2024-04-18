@@ -63,8 +63,8 @@ $startOp: 0.3;
     top:20%;
 
     @include sm-down {
-      width: 125px;
-      height: 125px;
+      width: 80px;
+      height: 80px;
     }
   }
 
@@ -105,7 +105,7 @@ $startOp: 0.3;
     @include sm-down {
       left: 50%;
       margin-left: -40px;
-      top: 150px;
+      top: 100px;
       width: 80px;
       height: 15px;
     }

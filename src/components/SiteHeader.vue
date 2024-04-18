@@ -5,7 +5,7 @@
         <a class="SiteHeader-titleLink" href="#home">{{ $t('header.title') }}</a>
       </h1>
 
-      <nav asia-label="Main" class="SiteHeader-nav">
+      <nav aria-label="Main" class="SiteHeader-nav">
         <ActionButton
           class="SiteHeader-cta"
           variant="secondary"
@@ -14,7 +14,26 @@
           {{ $t('header.buy') }}
           <SvgIcon name="pinksale" size="xl" />
         </ActionButton>
-        <a href="#about">{{ $t('header.about') }}</a>
+        <template v-if="!helpers.isMobile()">
+          <a href="#about">{{ $t('header.about') }}</a>
+          <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
+          <a href="#roadmap">{{ $t('header.roadmap') }}</a>
+          <a href="#whitepaper">{{ $t('header.whitepaper') }}</a>
+        </template>
+        
+        <ActionButton class="SiteHeader-hamburger" @click="toggleNav"/>
+      </nav>
+    </div>
+    <div class="SiteHeader-hamburgerNav" v-if="isNavOpen">
+      <ActionButton
+        class="SiteHeader-closeMobileNav"
+        size="xl"
+        @click="toggleNav"
+      >
+        X
+      </ActionButton>
+      <nav class="SiteHeader-mobileNav">
+        <a href="#about" @click="toggleNav">{{ $t('header.about') }}</a>
         <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
         <a href="#roadmap">{{ $t('header.roadmap') }}</a>
         <a href="#whitepaper">{{ $t('header.whitepaper') }}</a>
@@ -38,17 +57,28 @@ export default {
     SvgIcon
   },
   
+  data() {
+    return {
+      isNavOpen: false,
+    }
+  },
+
   mounted() {
     this.setSmoothScroll();
     this.animateLogo();
     this.animateBgColor();
     this.animateTextColor();
     this.animateBuyButton();
+    this.helpers.isMobile() && this.animateHamburger();
   },
   
   methods: {
+    toggleNav() {
+      this.isNavOpen = !this.isNavOpen;
+    },
+
     setSmoothScroll() {
-      const LINKS_SELECTOR = '.SiteHeader-nav a, .SiteHeader-titleLink';
+      const LINKS_SELECTOR = '.SiteHeader-nav a, .SiteHeader-titleLink, .SiteHeader-mobileNav a';
       const links = document.querySelectorAll(LINKS_SELECTOR);
       links.forEach((link) => {
         link.onclick = (e) => {
@@ -92,7 +122,7 @@ export default {
       const TARGET_SEL = '.SiteHeader';
       const TRIGGER_ELEMENT_SEL = '#about';
       const outroAnimationOptions = {
-        runInMobile: false,
+        runInMobile: true,
         gsapOptions: {
           scrollTrigger: {
             trigger: TRIGGER_ELEMENT_SEL,
@@ -111,7 +141,7 @@ export default {
       const TARGET_SEL = '.SiteHeader-nav a';
       const TRIGGER_ELEMENT_SEL = '#about';
       const outroAnimationOptions = {
-        runInMobile: false,
+        runInMobile: true,
         gsapOptions: {
           scrollTrigger: {
             trigger: TRIGGER_ELEMENT_SEL,
@@ -120,6 +150,25 @@ export default {
             end: 'top top',
           },
           color: '#000000',
+        },
+      };
+
+      this.timeline.to(TARGET_SEL, outroAnimationOptions);
+    },
+
+    animateHamburger() {
+      const TARGET_SEL = '.SiteHeader-hamburger';
+      const TRIGGER_ELEMENT_SEL = '#about';
+      const outroAnimationOptions = {
+        runInMobile: true,
+        gsapOptions: {
+          scrollTrigger: {
+            trigger: TRIGGER_ELEMENT_SEL,
+            scrub: true,
+            start: 'top 75%',
+            end: 'top top',
+          },
+          backgroundColor: '#000000',
         },
       };
 
@@ -151,6 +200,7 @@ export default {
 
 <style lang="scss">
 @import '@/styles/variables';
+@import '@/styles/breakpoints';
 
 .SiteHeader {
   left: 0;
@@ -158,6 +208,10 @@ export default {
   top: 0;
   width: 100%;
   z-index: 100;
+
+  @include sm-down {
+    padding-block: 5px;
+  }
   
   &-inner {
     max-width: 100%;
@@ -166,6 +220,11 @@ export default {
     align-items: center;
     display: flex;
     justify-content: space-between;
+
+    @include sm-down {
+      padding-inline: 20px;
+      gap: 8px;
+    }
   }
 
   &-title {
@@ -181,12 +240,21 @@ export default {
     overflow: hidden;
     text-indent: -99999px;
     width: 70px;
+
+    @include sm-down {
+      height: 50px;
+      width: 50px;
+    }
   }
 
   &-nav {
     align-items: center;
     display: flex;
     gap: 12px;
+    
+    @include sm-down {
+      gap: 8px;
+    }
 
     a {
       font-family: 'Krabby Patty', sans-serif;
@@ -194,15 +262,73 @@ export default {
       text-decoration: none;
       text-transform: uppercase;
       color: $white;
+
+      @include sm-down {
+        display: none;
+      }
     }
   }
 
   &-cta {
+    @include sm-down {
+      font-size: 18px;
+      gap: 10px;
+      padding: 8px 16px;
+    }
+
     .SvgIcon {
       width: 36px;
       height: 36px;
       margin: -6px;
     }
+  }
+
+  &-hamburger {
+    display: none;
+    padding: 0;
+    background-color: transparent;
+    border-color: transparent;
+    mask-image: url('@/assets/images/icons/hamburger.svg');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: $white;
+    width: 40px;
+    height: 40px;
+
+    @include sm-down {
+      display: block;
+    }
+  }
+
+  &-hamburgerNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    background-color: $primary;
+    padding-top: 30px;
+  }
+
+  &-mobileNav {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    a {
+      font-family: 'Krabby Patty', sans-serif;
+      font-size: 22px;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: $black;
+    }
+  }
+
+  &-closeMobileNav {
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 }
 </style>

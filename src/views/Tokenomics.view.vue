@@ -21,7 +21,7 @@
                   class="TokenomicsView-copyButton"
                   @click="copyToClipboard()"
                   >
-                  <SvgIcon name="copy" size="xl" />
+                  <SvgIcon name="copy" size="xs" />
                   <!-- TODO make component -->
                   <transition name="fade">
                     <div class="tooltip" v-if="showTooltip">Copied!</div>
@@ -132,6 +132,10 @@ export default {
   background-repeat: no-repeat, no-repeat, no-repeat, repeat, no-repeat;
   background-position: 70vw -5vh, 30vw 0vh, 0vw -5vh, center, center;
 
+  @include sm-down {
+    background-position: 70vw 5vh, 30vw 0vh, 0vw 5vh, center, center;
+  }
+
   &-contentWrapper {
     margin: auto;
     width: 100%;
@@ -156,9 +160,15 @@ export default {
     }
 
     @include sm-down {
-      display: flex;
+      box-sizing: border-box;
       gap: 12px;
       width: 100%;
+      background: $primary;
+      mask-image: url('@/assets/images/tokenomics-mask.svg');
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+      padding: 8px;
     }
   }
 
@@ -192,11 +202,16 @@ export default {
     white-space: nowrap;
     text-align: left;
 
-    &:first-child {
-      position: relative;
-    }
-
     @include sm-down {
+      display: flex;
+      gap: 12px; 
+      padding: 0;
+      margin-bottom: 0;
+      mask-image: unset;
+      background: unset;
+      border-radius: 0;
+      overflow: visible;
+
       &:nth-child(1) {
         flex: 3;
       }
@@ -207,6 +222,16 @@ export default {
         flex: 1;
       }
     }
+
+    &:first-child {
+      position: relative;
+
+      p {
+        @include sm-down {
+          padding-right: 38px;
+        }
+      }
+    }
   }
 
   &-infoTitle {
@@ -214,7 +239,7 @@ export default {
 
     @include sm-down {
       font-size: 20px;
-      margin-bottom: 22px;
+      margin-bottom: 0px;
     }
   }
 
@@ -234,6 +259,11 @@ export default {
     position: absolute;
     right: 18px;
     top: 18px;
+
+    @include sm-down {
+      top: 0px;
+      right: 0px;
+    }
   }
 
   // TODO: move when component created

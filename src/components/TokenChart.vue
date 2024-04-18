@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="TokenChart-labels">
-      <dl>
+      <dl class="TokenChart-list">
         <template v-for="(d, i) in data">
           <div
             ref="labelValueWrapper"
@@ -54,7 +54,11 @@ export default {
   },
   mounted() {
     this.data = this.data.sort((a, b) => b.value - a.value);
-    addEventListener('scroll', this.onViewport);
+    if(this.helpers.isMobile()) {
+      this.initChart();
+    } else {
+      addEventListener('scroll', this.onViewport);
+    }
   },
   
   methods: {
@@ -86,7 +90,7 @@ export default {
       };
 
       const durations = {
-        entryAnimation: 2000
+        entryAnimation: this.helpers.isMobile() ? 10 : 2000
       };
 
       this.draw(sizes, durations);
@@ -125,7 +129,7 @@ export default {
       let outerRadiusInterpolation = d3.interpolate(sizes.outerRadius, sizes.outerRadius);
 
       let arc = d3.arc();
-
+      
       arcs.transition()
         .duration(durations.entryAnimation)
         .attrTween("d", d => {
@@ -155,7 +159,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/styles/variables';
 @import '@/styles/breakpoints';
 
@@ -170,19 +174,24 @@ $height: 350px;
   @include sm-down {
     flex-direction: column;
     align-items: unset;
+    gap: 0;
   }
   
   &-chartContainer {
     position: relative;
     width: $width;
     height: $height;
+    
+    @include sm-down {
+      transform: scale(0.8) translateY(-30px);
+      margin: 0 auto;
+    }
   }
 
   &-chartMask {
     mask-image: url('@/assets/images/chart-mask.svg');
     mask-size: contain;
     mask-repeat: no-repeat;
-    // pointer-events: none;
     position: relative;
   }
 
@@ -197,12 +206,6 @@ $height: 350px;
     width: 100%;
     height: 100%;
   }
-
-  // &-chartShadow {
-  //   background-image: url('@/assets/images/chart-mask-border.svg');
-  //   filter: blur(4px);
-  //   opacity: 0.5;
-  // }
 
   &-chartImage {
     background-image: url('@/assets/images/chart-mask-image.svg');
@@ -247,6 +250,7 @@ $height: 350px;
 
     @include sm-down {
       font-size: 18px;
+      gap: 8px;
     }
   }
   
@@ -254,6 +258,19 @@ $height: 350px;
     color: $primary;
     font-weight: 700;
     margin: 0;
+    
+    @include sm-down {
+      font-size: 18px;
+    }
+  }
+
+  &-list {
+    @include sm-down {
+      display: flex; 
+      flex-wrap: wrap;
+      gap: 4px 18px;
+      transform: translateY(-50px);
+    }
   }
 }
 

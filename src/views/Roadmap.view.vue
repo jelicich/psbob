@@ -9,7 +9,7 @@
             v-for="phase, i in data"
             :key="i"
           >
-            <h2>{{ $t(`roadmap.phase.${i}.title`) }}</h2>
+            <h2 class="RoadmapView-infoTitle">{{ $t(`roadmap.phase.${i}.title`) }}</h2>
             <p
               class="RoadmapView-infoDescription text-xl"
               v-for="step, j in phase"
@@ -83,8 +83,9 @@ export default {
 };
 </script>
   
-  <style lang="scss">
+<style lang="scss" scoped>
 @import "@/styles/variables";
+@import "@/styles/breakpoints";
 
 .RoadmapView {
   background:
@@ -97,6 +98,10 @@ export default {
     background-size: 100%, 20vw, 22vw, 35vw, auto, 100%;
     background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, no-repeat;
     background-position: center 110vh, 80vw -5vh, 0vw 5vh, 40vw -5vh, center, center;
+
+  @include sm-down {
+    background-position: center bottom, 80vw 5vh, 0vw 15vh, 40vw 5vh, center, center;
+  }
 
   &-inner {
     display: flex;
@@ -112,11 +117,20 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
+
+    @include sm-down {
+      flex-direction: column;
+      gap: 8px;
+    }
   }
 
   &-title {
     color: $primary;
     text-align: center;
+
+    @include sm-down {
+      text-align: left;
+    }
   }
 
   &-info {
@@ -130,6 +144,23 @@ export default {
     mask-size: 100% 100%;
     flex: 1;
   }
+
+  &-infoTitle {
+    font-size: 20px;
+
+    @include sm-down {
+      margin: 0 0 8px;
+    }
+  }
+
+  &-infoDescription {
+    font-size: 18px;
+    
+    @include sm-down {
+      margin: 0;
+    }
+  }
+
   .check-icon::before {
     content: "\2713";
     color: green;

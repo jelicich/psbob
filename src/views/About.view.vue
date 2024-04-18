@@ -4,7 +4,10 @@
       <div class="AboutView-content d-flex">
         <FlippingCoin class="AboutView-coin"/>
         <div class="AboutView-about">
-          <h1 class="AboutView-title">About</h1>
+          <h1 class="AboutView-title">
+            About
+            <FlippingCoin class="AboutView-coinMobile"/>
+          </h1>
           <p class="AboutView-text text-lg">{{ $t('about.paragraph1') }}</p>
           <p class="AboutView-text text-lg">{{ $t('about.paragraph2') }}</p>
         </div>
@@ -36,7 +39,7 @@ export default {
       const TARGET_SEL = '.AboutView';
       const TRIGGER_ELEMENT_SEL = "#about";
       const outroAnimationOptions = {
-        runInMobile: true,
+        runInMobile: false,
         gsapOptions: {
           scrollTrigger: {
             trigger: TRIGGER_ELEMENT_SEL,
@@ -69,6 +72,10 @@ export default {
   background-size: 28vw, 10vw, 35vw, auto, 100%;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat, no-repeat;
   background-position: 60vw -5vh, 50vw -10vh, 0vw -10vh, center, center;
+  
+  @include sm-down {
+    background-position: 60vw 5vh, 50vw 10vh, 0vw 10vh, center, center;
+  }
 
   &-inner {
     display: flex;
@@ -92,11 +99,25 @@ export default {
     }
   }
 
+  &-title {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 24px;
+  }
+
   &-coin {
     @include sm-down {
-      position: absolute;
-      top: 0;
-      right: 30px;
+      display: none;
+    }
+  }
+
+  &-coinMobile {
+    display: none;
+
+    @include sm-down {
+      display: block;
     }
   }
 
