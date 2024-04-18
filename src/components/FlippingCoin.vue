@@ -28,6 +28,8 @@ export default {
 </script>
 <style lang="scss">
 @import '@/styles/variables';
+@import '@/styles/breakpoints';
+
 $startOp: 0.3;
 
 .FlippingCoin {
@@ -48,14 +50,6 @@ $startOp: 0.3;
     animation: bri 3s infinite ease-in;
   }
 
-  // svg{
-  //   margin-top:-10px;
-  // }
-
-  // svg path{
-  //   box-shadow:2px 10px 2px black;
-  // }
-
   #main {
     display: block;
     width: 250px; 
@@ -67,6 +61,11 @@ $startOp: 0.3;
     animation: turn 3s infinite;
     margin:auto;
     top:20%;
+
+    @include sm-down {
+      width: 125px;
+      height: 125px;
+    }
   }
 
   .coin-mid {
@@ -85,22 +84,8 @@ $startOp: 0.3;
     border-radius:50%;
   }
 
-  .shadow{
-    background:radial-gradient(rgba(31,56,45,0.7),rgba(31,56,45,0.8),rgba(31,56,45,0.2));
-    width:300px;
-    height:50px;
-    border-radius:50%;
-    position:absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    top:85%;
-    box-shadow:0px 0px 50px rgba(31,56,45);
-  }
-
   #child {
-      -webkit-transform: translateZ(0px);
+    -webkit-transform: translateZ(0px);
   }
 
   #child:after{
@@ -108,14 +93,22 @@ $startOp: 0.3;
     position:absolute;
     background: rgba(0,0,0,0.5);
     filter: blur(5px);
-    width:150px;
+    width:175px;
     height:20px;
     top:300px;
-    left:40px;
+    left:35px;
     border-radius:50%;
     box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, 0.3);
     opacity: $startOp;
     animation: opa 3s infinite ease-in;
+
+    @include sm-down {
+      left: 50%;
+      margin-left: -40px;
+      top: 150px;
+      width: 80px;
+      height: 15px;
+    }
   }
 
   #child1 {

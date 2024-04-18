@@ -5,7 +5,12 @@
       <div class="HomeView-content d-flex">
         <div class="HomeView-contentCol my-auto">
           <h1 class="HomeView-title">
-            <img alt="Primitive SpongeBob" src="@/assets/images/title.png"/>
+            <span>
+              <img class="HomeView-titleImg" alt="Primitive SpongeBob" src="@/assets/images/title.png"/>
+            </span>
+            <span>
+              <img class="HomeView-mainImgMobile" alt="Primitive SpongeBob" src="@/assets/images/primitive-sb.webp"/>
+            </span>
           </h1>
           <p class="HomeView-description text-xl">
             {{ $t('home.description') }}
@@ -169,9 +174,10 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/styles/variables';
 @import '@/styles/animations';
+@import '@/styles/breakpoints';
 
 .HomeView {
   background-image: url('@/assets/images/bg-simple.png');
@@ -204,19 +210,43 @@ export default {
     margin: auto 0;
     gap: 5vw;
     width: 100%;
+
+    @include sm-down {
+      flex-direction: column-reverse;
+    }
   }
 
   &-contentCol {
     width: 50%;
 
+    @include sm-down {
+      width: 100%;
+    }
+
     &:first-child {
       position: relative;
       z-index: 2;
+    }
+
+    &:last-child {
+      @include sm-down {
+        display: none;
+      }
     }
   }
 
   &-title {
     margin: 0;
+
+    @include sm-down {
+      display: flex;
+      gap: 28px;
+      justify-content: space-between;
+    }
+  }
+
+  &-titleImg {
+    max-width: 100%;
   }
 
   &-description {
@@ -226,8 +256,19 @@ export default {
   &-mainImg {
     width: 100%;
     max-width: 700px;
+    margin-block: auto;
     margin-left: auto;
     pointer-events: none;
+  }
+
+  &-mainImgMobile {
+    display: none;
+    max-width: 300px;
+    width: 100%;
+    
+    @include sm-down {
+      display: block;
+    }
   }
 
   &-misc {
@@ -238,6 +279,10 @@ export default {
     max-width: 500px;
     width: 25vw;
     pointer-events: none;
+
+    @include sm-down {
+      display: none;
+    }
 
     &--1 {
       left: 20px;

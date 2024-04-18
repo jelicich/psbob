@@ -118,6 +118,7 @@ export default {
 
 <style lang="scss">
 @import '@/styles/variables';
+@import '@/styles/breakpoints';
 
 .TokenomicsView {
   background: rgb(209,174,45);
@@ -140,7 +141,42 @@ export default {
   &-description {
     color: $primary;
   }
-  
+
+  &-content {
+    @include sm-down {
+      flex-direction: column;  
+    }
+  }
+
+  &-infoContainer {
+    width: 50%;
+
+    @include md-down {
+      width: 35%;
+    }
+
+    @include sm-down {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+    }
+  }
+
+  &-chartContainer {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+
+    @include md-down {
+      justify-content: unset;
+    }
+    
+    @include sm-down {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
   &-info {
     background: $primary;
     border-radius: 12px;
@@ -150,29 +186,48 @@ export default {
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
 
     &:first-child {
       position: relative;
+    }
+
+    @include sm-down {
+      &:nth-child(1) {
+        flex: 3;
+      }
+      &:nth-child(2) {
+        flex: 2;
+      }
+      &:nth-child(3) {
+        flex: 1;
+      }
     }
   }
 
   &-infoTitle {
     margin: 0 0 12px 0;
+
+    @include sm-down {
+      font-size: 20px;
+      margin-bottom: 22px;
+    }
   }
 
   &-infoDescription {
     margin: 0;
-  }
-
-  &-content {
-    > div {
-      flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    
+    @include sm-down {
+      font-size: 18px;
     }
-  }
-
-  &-chartContainer {
-    display: flex;
-    justify-content: center;
   }
 
   &-copyButton {

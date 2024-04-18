@@ -157,6 +157,7 @@ export default {
 </script>
 <style lang="scss">
 @import '@/styles/variables';
+@import '@/styles/breakpoints';
 
 $width: 350px;
 $height: 350px;
@@ -165,6 +166,11 @@ $height: 350px;
   display: flex;
   gap: 12px;
   align-items: end;
+
+  @include sm-down {
+    flex-direction: column;
+    align-items: unset;
+  }
   
   &-chartContainer {
     position: relative;
@@ -212,6 +218,10 @@ $height: 350px;
     &.is-dimmed {
       opacity: 0.3;
     }
+
+    @include sm-down {
+      margin-bottom: 0;
+    }
   }
 
   &-labelColor {  
@@ -222,6 +232,11 @@ $height: 350px;
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;
+
+    @include sm-down {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   &-label {
@@ -229,6 +244,10 @@ $height: 350px;
     color: $primary;
     display: flex;
     gap: 12px;
+
+    @include sm-down {
+      font-size: 18px;
+    }
   }
   
   &-value {

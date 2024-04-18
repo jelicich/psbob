@@ -2,11 +2,11 @@
   <section class="AboutView Section" id="about">
     <div class="AboutView-inner View">
       <div class="AboutView-content d-flex">
-        <FlippingCoin />
+        <FlippingCoin class="AboutView-coin"/>
         <div class="AboutView-about">
           <h1 class="AboutView-title">About</h1>
-          <p class="text-lg">{{ $t('about.paragraph1') }}</p>
-          <p class="text-lg">{{ $t('about.paragraph2') }}</p>
+          <p class="AboutView-text text-lg">{{ $t('about.paragraph1') }}</p>
+          <p class="AboutView-text text-lg">{{ $t('about.paragraph2') }}</p>
         </div>
       </div>
       
@@ -36,7 +36,7 @@ export default {
       const TARGET_SEL = '.AboutView';
       const TRIGGER_ELEMENT_SEL = "#about";
       const outroAnimationOptions = {
-        runInMobile: false,
+        runInMobile: true,
         gsapOptions: {
           scrollTrigger: {
             trigger: TRIGGER_ELEMENT_SEL,
@@ -54,8 +54,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/styles/variables';
+@import '@/styles/breakpoints';
 
 .AboutView {
   background-color: $primary;
@@ -76,8 +77,32 @@ export default {
   &-content {
     align-items: center;
 
+    @include sm-down {
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
     div {
       flex: 1;
+
+      @include sm-down {
+        flex: unset;
+      }
+    }
+  }
+
+  &-coin {
+    @include sm-down {
+      position: absolute;
+      top: 0;
+      right: 30px;
+    }
+  }
+
+  &-text {
+    @include sm-down {
+      font-size: 18px;
     }
   }
 }
