@@ -43,10 +43,10 @@ export default {
   data() {
     return {
       data: [
-        {value: 30, name: 'liquidity', color: '#81667A'}, 
-        {value: 10, name: 'marketing', color: '#c8a058'},
+        {value: 25, name: 'liquidity', color: '#81667A'}, 
+        {value: 5, name: 'marketing', color: '#c8a058'},
         {value: 5, name: 'team', color: '#9DD9D2'},
-        {value: 5, name: 'cex', color: '#fcff5b'},
+        {value: 15, name: 'cex', color: '#fcff5b'},
         {value: 50, name: 'presale', color: '#D8A7CA'},
       ],
       listener: null,

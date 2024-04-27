@@ -18,7 +18,6 @@
           <a href="#about">{{ $t('header.about') }}</a>
           <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
           <a href="#roadmap">{{ $t('header.roadmap') }}</a>
-          <a href="#whitepaper">{{ $t('header.whitepaper') }}</a>
         </template>
         
         <ActionButton class="SiteHeader-hamburger" @click="toggleNav"/>
