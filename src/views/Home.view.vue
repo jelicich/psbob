@@ -6,10 +6,10 @@
         <div class="HomeView-contentCol my-auto">
           <h1 class="HomeView-title">
             <span>
-              <img class="HomeView-titleImg" alt="Primitive SpongeBob" src="@/assets/images/title.png"/>
+              <img class="HomeView-titleImg" alt="Primitive Sponge" src="@/assets/images/title.png"/>
             </span>
             <span>
-              <img class="HomeView-mainImgMobile" alt="Primitive SpongeBob" src="@/assets/images/primitive-sb.webp"/>
+              <img class="HomeView-mainImgMobile" alt="Primitive Sponge" src="@/assets/images/primitive-sb.webp"/>
             </span>
           </h1>
           <p class="HomeView-description text-xl">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="HomeView-contentCol d-flex">
-          <img class="HomeView-mainImg" alt="Primitive SpongeBob" src="@/assets/images/primitive-sb.webp"/>
+          <img class="HomeView-mainImg" alt="Primitive Sponge" src="@/assets/images/primitive-sb.webp"/>
         </div>
       </div>
     </div>

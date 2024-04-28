@@ -43,6 +43,7 @@ export default {
         { name: 'CoinMarketCap', img: 'coinmarketcap.svg' },
         { name: 'CoinGecko', img: 'coingecko.svg' },
         { name: 'PinkSale', img: 'pinksale.svg' },
+        { name: 'Freshcoins', img: 'freshcoins.svg' },
       ]
     }
   },
