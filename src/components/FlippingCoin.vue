@@ -34,7 +34,7 @@ $startOp: 0.3;
 
 .FlippingCoin {
   &-imgWrapper {
-    background: url('@/assets/images/coin-flip1.svg') no-repeat;
+    background: url('@/assets/images/coin-flip2.svg') no-repeat;
     background-size: contain;
     height: 100%;
     width: 100%;
@@ -42,7 +42,7 @@ $startOp: 0.3;
   }
 
   &-imgWrapper2 {
-    background: url('@/assets/images/coin-flip2.svg') no-repeat;
+    background: url('@/assets/images/coin-flip1.svg') no-repeat;
     background-size: contain;
     height: 100%;
     width: 100%;
@@ -112,36 +112,67 @@ $startOp: 0.3;
   }
 
   #child1 {
-      -webkit-transform: translateZ(-10px);
+    -webkit-transform: translateZ(-10px);
+    
+    @include sm-down {
+      -webkit-transform: translateZ(-8px);
+    }
   }
 
   #child2 {
-      -webkit-transform: translateZ(-5px);
+    -webkit-transform: translateZ(-5px);
 
+    @include sm-down {
+      -webkit-transform: translateZ(-7px);
+    }
   }
 
   #child3 {
-      -webkit-transform: translateZ(-2px);
+    -webkit-transform: translateZ(-2px);
+    
+    @include sm-down {
+      -webkit-transform: translateZ(-6px);
+    }
   }
 
   #child4 {
-      -webkit-transform: translateZ(-8px);
+    -webkit-transform: translateZ(-8px);
+    
+    @include sm-down {
+      -webkit-transform: translateZ(-5px);
+    }
   }
 
   #child5 {
-      -webkit-transform: translateZ(-12px);
+    -webkit-transform: translateZ(-12px);
+
+    @include sm-down {
+      -webkit-transform: translateZ(-4px);
+    }
   }
 
   #child6 {
-      -webkit-transform: translateZ(-14px);
+    -webkit-transform: translateZ(-14px);
+    
+    @include sm-down {
+      -webkit-transform: translateZ(-3px);
+    }
   }
 
   #child7 {
-      -webkit-transform: translateZ(-16px);
+    -webkit-transform: translateZ(-16px);
+
+    @include sm-down {
+      -webkit-transform: translateZ(-2px);
+    }
   }
 
   #child8 {
-      -webkit-transform: translateZ(-18px);
+    -webkit-transform: translateZ(-18px);
+    
+    @include sm-down {
+      -webkit-transform: translateZ(-9px);
+    }
   }
   
   @keyframes turn{

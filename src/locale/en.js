@@ -5,6 +5,7 @@ export default {
     tokenomics: 'Tokenomics',
     roadmap: 'Roadmap',
     whitepaper: 'Whitepaper',
+    contact: 'Contact',
     buy: 'Presale on Pinksale'
   },
   home: {
@@ -73,5 +74,10 @@ export default {
       cex: 'CEX',
       presale: 'Presale',
     }
+  },
+  contact: {
+    title: 'Contact',
+    partners: 'Partners',
+    paragraph: 'Questions, doubts, collabs? Drop an email to: '
   }
 }

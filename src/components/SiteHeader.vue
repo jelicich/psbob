@@ -18,6 +18,7 @@
           <a href="#about">{{ $t('header.about') }}</a>
           <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
           <a href="#roadmap">{{ $t('header.roadmap') }}</a>
+          <a href="#contact">{{ $t('header.contact') }}</a>
         </template>
         
         <ActionButton class="SiteHeader-hamburger" @click="toggleNav"/>
@@ -33,9 +34,10 @@
       </ActionButton>
       <nav class="SiteHeader-mobileNav">
         <a href="#about" @click="toggleNav">{{ $t('header.about') }}</a>
-        <a href="#tokenomics">{{ $t('header.tokenomics') }}</a>
-        <a href="#roadmap">{{ $t('header.roadmap') }}</a>
-        <a href="#whitepaper">{{ $t('header.whitepaper') }}</a>
+        <a href="#tokenomics" @click="toggleNav">{{ $t('header.tokenomics') }}</a>
+        <a href="#roadmap" @click="toggleNav">{{ $t('header.roadmap') }}</a>
+        <a href="#whitepaper" @click="toggleNav">{{ $t('header.whitepaper') }}</a>
+        <a href="#contact" @click="toggleNav">{{ $t('header.contact') }}</a>
       </nav>
     </div>
   </header>
@@ -317,10 +319,11 @@ export default {
 
     a {
       font-family: 'Krabby Patty', sans-serif;
-      font-size: 22px;
+      font-size: 30px;
       text-decoration: none;
       text-transform: uppercase;
       color: $black;
+      padding: 8px 0;
     }
   }
 

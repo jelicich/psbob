@@ -55,7 +55,7 @@ export default {
   mounted() {
     this.data = this.data.sort((a, b) => b.value - a.value);
     if(this.helpers.isMobile()) {
-      this.initChart();
+      this.initChartMobile();
     } else {
       addEventListener('scroll', this.onViewport);
     }
@@ -155,6 +155,43 @@ export default {
             .outerRadius(outerRadiusInterpolation(t));
         });
       
+    },
+
+    initChartMobile() {
+      const width = 300;
+      const data = this.data;
+
+      const height = Math.min(width, 500);
+      const radius = Math.min(width, height) / 2;
+
+      const arc = d3.arc()
+          .innerRadius(radius * 0.6)
+          .outerRadius(radius - 1);
+
+      const pie = d3.pie()
+          .padAngle(1 / radius)
+          .sort(null)
+          .value(d => d.value);
+
+      const svg = d3.select("#chart").html("")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("viewBox", [-width / 2, -height / 2, width, height])
+          .attr("style", "max-width: 100%; height: auto;");
+
+      svg.append("g")
+        .selectAll()
+        .data(pie(data))
+        .join("path")
+        .attr("fill", d => d.data.color)
+        .attr("d", arc)
+        .attr('id', (d) => d.data.name)
+        .on('mouseover', (d) => {
+          this.dimList(d.target.id);
+        })
+        .on('mouseout', () => {
+          this.undimList();
+        });
     }
   }
 }
