@@ -36,7 +36,6 @@
         <a href="#about" @click="toggleNav">{{ $t('header.about') }}</a>
         <a href="#tokenomics" @click="toggleNav">{{ $t('header.tokenomics') }}</a>
         <a href="#roadmap" @click="toggleNav">{{ $t('header.roadmap') }}</a>
-        <a href="#whitepaper" @click="toggleNav">{{ $t('header.whitepaper') }}</a>
         <a href="#contact" @click="toggleNav">{{ $t('header.contact') }}</a>
       </nav>
     </div>

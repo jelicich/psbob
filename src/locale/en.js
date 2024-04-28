@@ -9,7 +9,7 @@ export default {
     buy: 'Presale on Pinksale'
   },
   home: {
-    description: 'The token you were waiting for, to go from Bikini Bottom to the moon. Hold your bags, let the jeets out, relax, and enjoy the most erratic journey to success with us.',
+    description: 'The token you were waiting for, to go from Bikini Bottom to the moon. Join us on this erratic yet exciting journey to success!',
     actions: {
       buy: 'Presale on Pinksale',
       telegram: 'Telegram',

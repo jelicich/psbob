@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <template v-if="true">
+    <template v-if="false">
       <SoonView />
     </template>
     <template v-else>
