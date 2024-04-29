@@ -10,6 +10,7 @@
           class="SiteHeader-cta"
           variant="secondary"
           size="lg"
+          @click="openLink('https://www.pinksale.finance/solana/launchpad/3kepCej4N4CmhP3j9DFiWvNFfQv8SVuxU1k6xrHYC7n9')"
         >
           {{ $t('header.buy') }}
           <SvgIcon name="pinksale" size="xl" />
@@ -73,6 +74,10 @@ export default {
   },
   
   methods: {
+    openLink(url) {
+      window.open(url, '_blank');
+    },
+    
     toggleNav() {
       this.isNavOpen = !this.isNavOpen;
     },
