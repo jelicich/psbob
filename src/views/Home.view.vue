@@ -18,7 +18,11 @@
 
           <div class="HomeView-actions">
             
-            <ActionButton size="xl" class="HomeView-cta">
+            <ActionButton 
+              size="xl" 
+              class="HomeView-cta"
+              @click="openLink('https://www.pinksale.finance/solana/launchpad/3kepCej4N4CmhP3j9DFiWvNFfQv8SVuxU1k6xrHYC7n9')"
+            >
               {{ $t('home.actions.buy') }}
               <SvgIcon name="pinksale-dark" size="xl" />
             </ActionButton>
