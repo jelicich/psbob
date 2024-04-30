@@ -26,7 +26,7 @@ export default {
       required: false,
       default: 'primary',
       validator: (value) => {
-        return ['primary', 'secondary'].includes(value);
+        return ['primary', 'secondary', 'success', 'info'].includes(value);
       }
     }
   },
@@ -91,11 +91,22 @@ export default {
     color: $black;
   }
 
-  // TODO:
   &--secondary {
     background-color: $white;
     border-color: $black;
     color: $black;
+  }
+
+  &--success {
+    background-color: $success;
+    border-color: $success;
+    color: $white;
+  }
+
+  &--info {
+    background-color: $info;
+    border-color: $info;
+    color: $white;
   }
 }
 </style>

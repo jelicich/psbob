@@ -14,6 +14,10 @@ export default {
       buy: 'Presale on Pinksale',
       telegram: 'Telegram',
       x: 'X - (Twitter)'
+    },
+    info: {
+      audit: 'Audit',
+      kyc: 'KYC'
     }
   },
   about: {

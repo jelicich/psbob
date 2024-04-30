@@ -20,7 +20,9 @@
           </h2>
           <ul class="ContactView-partnersList">
             <li v-for="partner, i in partners" :key="i" class="ContactView-partner">
-              <img :title="partner.name" :alt="partner.name" class="ContactView-partnerImg" v-if="partner.img" :src="require(`@/assets/images/logos/${partner.img}`)" />
+              <a :href="partner.link" target="_blank">
+                <img :title="partner.name" :alt="partner.name" class="ContactView-partnerImg" v-if="partner.img" :src="require(`@/assets/images/logos/${partner.img}`)" />
+              </a>
             </li>
           </ul>
         </div>
@@ -38,12 +40,14 @@ export default {
   data() {
     return {
       partners: [
-        { name: 'Raydium', img: 'raydium.svg' },
-        { name: 'DexScreener', img: 'dex-screener.svg' },
-        { name: 'CoinMarketCap', img: 'coinmarketcap.svg' },
-        { name: 'CoinGecko', img: 'coingecko.svg' },
-        { name: 'PinkSale', img: 'pinksale.svg' },
-        { name: 'Freshcoins', img: 'freshcoins.svg' },
+        { name: 'DEXView', img: 'dexview.svg', link: 'https://www.dexview.com/' },
+        { name: 'PinkSale', img: 'pinksale.svg', link: 'https://www.pinksale.finance/' },
+        { name: 'Raydium', img: 'raydium.svg', link: 'https://raydium.io/' },
+        { name: 'DexScreener', img: 'dex-screener.svg', link: 'https://dexscreener.com/' },
+        { name: 'CoinMarketCap', img: 'coinmarketcap.svg', link: 'https://coinmarketcap.com/' },
+        { name: 'CoinGecko', img: 'coingecko.svg', link: 'https://www.coingecko.com/' },
+        { name: 'Freshcoins', img: 'freshcoins.svg', link: 'https://www.freshcoins.io/' },
+        { name: 'Cyberscope', img: 'cyberscope.png', link: 'https://www.cyberscope.io/' },
       ]
     }
   },

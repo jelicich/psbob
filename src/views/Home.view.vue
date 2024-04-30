@@ -15,9 +15,26 @@
           <p class="HomeView-description text-xl">
             {{ $t('home.description') }}
           </p>
+          <div class="HomeView-info">
+            <ActionButton 
+              size="xs" 
+              class="HomeView-audit"
+              variant="success"
+              @click="openLink('/files/PrimitiveSpongeAudit.pdf')"
+            >
+              {{ $t('home.info.audit') }}
+            </ActionButton>
+            <ActionButton 
+              size="xs" 
+              class="HomeView-kyc"
+              variant="info"
+              @click="openLink('/files/kyc-cert.pdf')"
+            >
+              {{ $t('home.info.kyc') }}
+            </ActionButton>
+          </div>
 
           <div class="HomeView-actions">
-            
             <ActionButton 
               size="xl" 
               class="HomeView-cta"
@@ -30,6 +47,7 @@
             <ActionButton
               size="xl"
               :title="$t('home.actions.telegram')" 
+              variant="secondary"
               @click="openLink('https://t.me/+wKEdNPCjDuhlMmY8')"
               >
               <SvgIcon name="telegram" size="xl" />
@@ -38,6 +56,7 @@
             <ActionButton 
               size="xl" 
               :title="$t('home.actions.x')"
+              variant="secondary"
               @click="openLink('https://twitter.com/PSBOB_Solana')"
               >
               <SvgIcon name="x" size="xl" />
@@ -255,6 +274,12 @@ export default {
 
   &-description {
     color: $white;
+  }
+
+  &-info {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 24px;
   }
 
   &-mainImg {
