@@ -4,7 +4,7 @@
       <SoonView />
     </template>
     <template v-else>
-      <SiteHeader />    
+      <SiteHeader />
       <div class="content">
         <HomeView />
         <AboutView />
